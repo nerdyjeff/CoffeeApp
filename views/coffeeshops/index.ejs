@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+            <h1>Home of Coffee Lovers</h1>
+            <p>We bring you a list of top coffee shops in NYC picked by fellow coffee lovers</p
+            <p>
+            <a class="btn btn-primary btn-large" href="coffeeshops/new">Add new Coffeeshop</a>
+            </p>
+            </div>
+        </header>
+        
+            <div class ="row text-center" style="display:flex; flex-wrap:wrap;">
+            <% coffeeshops.forEach(function(coffeeshops){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= coffeeshops.image %>" class="img-fluid" alt="Responsive image">
+                    <div class="caption">
+                       <h4><%= coffeeshops.name %></h4>
+                    </div>
+                    <p>
+                        <a href="/coffeeshops/<%= coffeeshops._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>
+            </div>
+            <% }); %>
+            </div>
+            </div>
+    
+    <% include ../partials/footer %>
