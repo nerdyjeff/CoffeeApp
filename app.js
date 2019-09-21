@@ -10,7 +10,16 @@ var User = require("./models/user");
 var seedDB = require("./seeds");
 
 
-mongoose.connect("mongodb://localhost:27017/coffee_house_v10",{useNewUrlParser:true});
+//mongoose.connect("mongodb://localhost:27017/coffee_house_v10",{useNewUrlParser:true});
+mongoose.connect('mongodb+srv://kanmacloudguru:Alphadog_001@cluster0-dtiqn.mongodb.net/test?retryWrites=true&w=majority',{
+    useNewUrlParser: true,
+    useCreateIndex: true
+}).then(() => {
+    console.log('Connected to DB');
+}).catch(err => {
+    console.log('ERROR:', err.message);
+});
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname +"/public"));
