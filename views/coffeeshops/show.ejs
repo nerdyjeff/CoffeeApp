@@ -16,6 +16,15 @@
                     <h4 class="pull-right">$5.00/hr</h4>
                     <h4><a><%= coffeeshop.name %></a></h4>
                     <p><%= coffeeshop.description %></p>
+                     <p>
+                         <em>Submitted By <%= coffeeshop.author.username %></em>
+                    </p>
+                    <% if(JSON.stringify(currentUser) && JSON.stringify(coffeeshop.author.id) === JSON.stringify(currentUser._id)){ %>
+                    <a class="btn btn-warning" href = "/coffeeshops/<%= coffeeshop._id %>/edit">Edit</a>
+                    <form class="delete-form" action= "/coffeeshops/<%= coffeeshop._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <% }%>
                 </div>
             </div>
             <div class="well">
@@ -26,11 +35,17 @@
                     <% coffeeshop.comments.forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-md-12">
-                            <strong><%= comment.author %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right">10 days ago</span>
                             <p>
                                 <%= comment.text %>
                             </p>
+                            <% if(JSON.stringify(currentUser) && JSON.stringify(comment.author.id) === JSON.stringify(currentUser._id)){ %>
+                             <a class="btn btn-xs btn-warning" href = "/coffeeshops/<%= coffeeshop._id %>/comments/<%=comment._id%>/edit">Edit</a>
+                             <form class="delete-form" action="/coffeeshops/<%= coffeeshop._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                             </form>
+                             <% } %>
                         </div>
                     </div>
             <% }) %>
